@@ -1,11 +1,12 @@
 use std::f64::consts::E;
-use std::io::{self, Write};
+use std::io::{self};
+use std::process::Command;
 
-struct poisson {
+struct Poisson {
     lambda: f64,
 }
 
-impl poisson {
+impl Poisson {
     fn funcion(&self, n: u32) -> f64 {
         let numerator = self.lambda.powi(n as i32) * E.powi(-self.lambda as i32);
         let mut factorial = 1.0;
@@ -14,6 +15,16 @@ impl poisson {
         }
         numerator / factorial
     }
+}
+
+fn clear(){
+    Command::new("clear").status().expect("Error al limpiar la pantalla");
+}
+fn pause(){
+    println!("Presiona enter para continuar...");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    clear();
 }
 
 fn main() {
@@ -63,11 +74,11 @@ fn main() {
                 println!("n se ha agregado correctamente");
             }
             3 => {
-                if lambda == 0.0 || n == 0 {
+                if lambda <= 0.0{
                     println!("Agrega el valor de lambda y n");
                     return;
                 } 
-                    let poisson = poisson { lambda: lambda };
+                    let poisson = Poisson { lambda: lambda };
                     let result = poisson.funcion(n);
                     println!("El resultado de la funcion de poisson es: {}", result);
                     println!("En porcentaje: {}%", result * 100.0);
@@ -80,7 +91,10 @@ fn main() {
             5 => break,
             _ => {
                 println!("Opcion no valida");
+                
             }
+            
         }
+        pause();
     }
 }
