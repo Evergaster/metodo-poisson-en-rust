@@ -80,8 +80,8 @@ fn main() {
                 } 
                     let poisson = Poisson { lambda: lambda };
                     let result = poisson.funcion(n);
-                    println!("El resultado de la funcion de poisson es: {}", result);
-                    println!("En porcentaje: {}%", result * 100.0);
+                    println!("El resultado de la funcion de poisson es: {:.5}", result);
+                    println!("En porcentaje: {:.2}%", result * 100.0);
                 
             }
             4 => {
