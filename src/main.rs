@@ -8,7 +8,7 @@ struct Poisson {
 
 impl Poisson {
     fn funcion(&self, n: u32) -> f64 {
-        let numerator = self.lambda.powi(n as i32) * E.powi(-self.lambda as i32);
+        let numerator = self.lambda.powi(n as i32) * E.powf(-self.lambda);
         let mut factorial = 1.0;
         for x in 1..=n {
             factorial *= x as f64;
@@ -76,7 +76,7 @@ fn main() {
             3 => {
                 if lambda <= 0.0{
                     println!("Agrega el valor de lambda y n");
-                    return;
+                    continue;
                 } 
                     let poisson = Poisson { lambda: lambda };
                     let result = poisson.funcion(n);
